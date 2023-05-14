@@ -1,9 +1,12 @@
+const dotenv = require("dotenv").config();
 const express = require("express");
 const connectDB = require("./config/connectDB");
-const dotenv = require("dotenv").config();
+const Task = require("./models/taskModel");
+const taskRoute = require("./routes/taskRoute");
 
 const app = express();
 app.use(express.json());
+app.use("/api/task", taskRoute);
 
 
 app.get("/", (req, res) => {
@@ -11,15 +14,8 @@ app.get("/", (req, res) => {
 })
 
 
-;
+    ;
 const PORT = process.env.PORT || 5000;
-
-app.post("/api/task", async (req,res) => {
-    console.log(req.body);
-    res.send("task created");
-
-})
-
 const startServer = async () => {
     try {
         await connectDB();
