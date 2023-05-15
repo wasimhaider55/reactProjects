@@ -1,12 +1,16 @@
-const dotenv = require("dotenv").config();
-const express = require("express");
-const connectDB = require("./config/connectDB");
-const Task = require("./models/taskModel");
-const taskRoute = require("./routes/taskRoute");
+
+import dotenv from "dotenv";
+import express from "express";
+import connectDB from "./config/connectDB.js";
+// import Task from "../models/taskModel.js"
+// import taskRoute from "../backend/controller/taskController.js";
+import TaskRouters from "../backend/routes/taskRoute.js"
+
+dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use("/api/task", taskRoute);
+app.use("/api/task", TaskRouters);
 
 
 app.get("/", (req, res) => {
@@ -14,8 +18,8 @@ app.get("/", (req, res) => {
 })
 
 
-    ;
-const PORT = process.env.PORT || 5000;
+
+const PORT = process.env.PORT || 8800;
 const startServer = async () => {
     try {
         await connectDB();

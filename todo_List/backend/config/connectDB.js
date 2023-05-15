@@ -1,8 +1,11 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const connectDB = async () => {
     try {
-        const connect = await mongoose.connect(`mongodb+srv://wasimhaider:wasimhaider@wasimhaidercluster.bcrb4o4.mongodb.net/taskManager?retryWrites=true&w=majority`)
+        const connect = await mongoose.connect(process.env.MONGO_URL)
         console.log("mongoDB is connected")
     } catch (error) {
         console.log(error);
@@ -10,8 +13,7 @@ const connectDB = async () => {
     }
 }
 
-module.exports = connectDB;
-
+export default connectDB;
 
 
 

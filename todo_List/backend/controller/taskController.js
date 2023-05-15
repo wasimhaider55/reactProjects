@@ -1,7 +1,7 @@
-const Task = require("../models/taskModel");
+import Task from "../models/taskModel.js";
 
 // create a task
-const createTask = async (req, res) => {
+export const createTask = async (req, res) => {
     try {
         const task = await Task.create(req.body);
         res.status(200).json(task);
@@ -11,7 +11,7 @@ const createTask = async (req, res) => {
 }
 
 // get/read all tasks 
-const getTasks = async (req, res) => {
+export const getTasks = async (req, res) => {
     try {
         const task = await Task.find();
         res.status(200).json(task);
@@ -20,11 +20,11 @@ const getTasks = async (req, res) => {
     }
 }
 // get/read single  task 
-const getTask = async (req, res) => {
+export const getTask = async (req, res) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const task = await Task.findById(id);
-        if(!task){
+        if (!task) {
             return res.status(404).json(`task not found at the id  ${id}`)
         }
         res.status(200).json(task);
@@ -34,11 +34,11 @@ const getTask = async (req, res) => {
 }
 
 // delete a   task 
-const deleteTask = async (req, res) => {
+export const deleteTask = async (req, res) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const task = await Task.findByIdAndDelete(id);
-        if(!task){
+        if (!task) {
             return res.status(404).json(`task not found at the id  ${id}`)
         }
         res.status(200).json("task deleted");
@@ -48,17 +48,17 @@ const deleteTask = async (req, res) => {
 }
 
 // update a   task 
-const updateTask = async (req, res) => {
+export const updateTask = async (req, res) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const task = await Task.findByIdAndUpdate(
-            {_id: id }, req.body, 
+            { _id: id }, req.body,
             {
-                new:true , 
-                runValidators : true
-            } 
-            )
-        if(!task){
+                new: true,
+                runValidators: true
+            }
+        )
+        if (!task) {
             return res.status(404).json(`task not found at the id  ${id}`)
         }
         res.status(200).json(task);
@@ -67,12 +67,3 @@ const updateTask = async (req, res) => {
     }
 }
 
-
-
-module.exports = {
-    createTask,
-    getTasks,
-    getTask,
-    deleteTask,
-    updateTask,
-}

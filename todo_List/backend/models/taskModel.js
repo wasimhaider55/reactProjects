@@ -1,20 +1,20 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const taskSchema = mongoose.Schema (
+const taskSchema = mongoose.Schema(
     {
-        name : {
+        name: {
             type: String,
             required: [true, "please add a task"]
         },
         complete: {
             type: Boolean,
             required: true,
-            default:false 
+            default: false
         },
     },
     {
-        timestamps: true 
-    } 
-    );
-    const Task = mongoose.model("task" , taskSchema);
-    module.exports = Task;
+        timestamps: true
+    }
+);
+const Task = mongoose.model("task", taskSchema);
+export default Task;
