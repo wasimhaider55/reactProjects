@@ -2,14 +2,16 @@
 import dotenv from "dotenv";
 import express from "express";
 import connectDB from "./config/connectDB.js";
+import mongoose from "mongoose";
 // import Task from "../models/taskModel.js"
 // import taskRoute from "../backend/controller/taskController.js";
 import TaskRouters from "../backend/routes/taskRoute.js"
-
+import cors from "cors";
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 app.use("/api/task", TaskRouters);
 
 
